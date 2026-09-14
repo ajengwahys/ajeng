@@ -24,14 +24,20 @@
 
   html {
     scroll-behavior: smooth;
+    font-size: 17.5px; /* Memperbesar ukuran semua elemen proporsional sebesar ~1.5px */
   }
 
-  html, body {
+  /* Global Body (Satu Kesatuan Background) */
+  body {
     width: 100%;
-    min-width: 1200px; /* Menjaga lebar minimum desktop */
+    min-width: 1200px;
     overflow-x: hidden;
+    background-color: #F8F6F0;
+    color: #1E1A17;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Pengaturan Jarak/Gap Seragam Untuk Semua Section */
   .site-section {
     position: relative;
     display: block;
@@ -39,20 +45,61 @@
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+    padding: 40px 0; /* Gap atas & bawah yang seragam */
   }
 
-  .site-section + .site-section {
-    margin-top: 56px;
+  /* =========================================================
+     GLOBAL DARK MODE OVERRIDES
+     ========================================================= */
+  body.dark-mode {
+      background-color: #121212 !important;
+      color: #F8F6F0 !important;
+  }
+  
+  body.dark-mode .bg-white,
+  body.dark-mode .bg-\[\#f5f5f7\],
+  body.dark-mode .bg-\[\#FAF9F6\],
+  body.dark-mode .bg-zinc-200 {
+      background-color: #1E1A17 !important;
+      color: #F8F6F0 !important;
+      border-color: #3E3731 !important;
+  }
+  
+  body.dark-mode .text-\[\#1E1A17\], 
+  body.dark-mode .text-gray-800 {
+      color: #F8F6F0 !important;
+  }
+  
+  body.dark-mode .text-gray-600, 
+  body.dark-mode .text-gray-500 {
+      color: #A3A3A3 !important;
+  }
+  
+  body.dark-mode svg {
+      fill: #F8F6F0;
+  }
+  
+  /* Section 3 Dark Mode Variables */
+  body.dark-mode #section-3 {
+      --text-dark: #F8F6F0;
+      --text-gray: #A3A3A3;
+      --menu-text-dark: #F8F6F0;
+      --menu-text-muted: #A3A3A3;
+  }
+  
+  /* Section 6 Dark Mode Texts */
+  body.dark-mode #section-6 .content-left h1,
+  body.dark-mode #section-6 .content-left p {
+      color: #F8F6F0 !important;
+  }
+  body.dark-mode #section-6 .inner-card-bg {
+      background-color: #1F4A15 !important;
   }
 </style>
 
 <style>
-
         #section-1 {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F6F0;
-            color: #1E1A17;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Animasi Jatuh & Numbuk Tegas (Infinite) untuk "Ajengwahys" */
@@ -66,27 +113,6 @@
         #section-1 .animate-letter {
             display: inline-block;
             animation: s1-firmHit 3s infinite;
-        }
-
-        /* Dark Mode Styling Classes */
-        #section-1.dark-mode {
-            background-color: #121212;
-            color: #F8F6F0;
-        }
-        #section-1.dark-mode .bg-white {
-            background-color: #1E1A17 !important;
-            color: #F8F6F0 !important;
-            border-color: #2D2622 !important;
-        }
-        #section-1.dark-mode .text-\[\#1E1A17\] {
-            color: #F8F6F0 !important;
-        }
-        #section-1.dark-mode .text-gray-600 {
-            color: #A3A3A3 !important;
-        }
-        
-        #section-1.dark-mode svg {
-            fill: #F8F6F0;
         }
 
         /* Efek kedip kursor typewriter */
@@ -106,11 +132,9 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-    
 </style>
 
 <style>
-
     #section-2 {
       font-family: 'Inter', sans-serif;
     }
@@ -123,6 +147,15 @@
       -webkit-background-clip: text;
       background-clip: text;
       animation: s2-shine 3s linear infinite;
+    }
+
+    /* Dark Mode title gradient adjustment for section-2 */
+    body.dark-mode #section-2 .title-gradient {
+      background: linear-gradient(110deg, #F8F6F0 20%, #58A83E 50%, #F8F6F0 80%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
     }
 
     @keyframes s2-shine {
@@ -148,46 +181,36 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-  
 </style>
 
 <style>
-
         /* =========================================================
            1. STYLES UNTUK BAGIAN ATAS (FOODEZA INTERACTIVE)
            ========================================================= */
         #section-3 {
-            --bg-color-hero: #FDF9F3;
             --primary-green: #40916c;
             --text-dark: #1A1A1A;
             --text-gray: #555555;
             --font-sans: 'Inter', sans-serif;
             
             /* Variables untuk Bakery Menu di bawah */
-            --bg-color-menu: #fdfaf6;
             --menu-text-dark: #2d3748;
             --menu-text-muted: #8b96a5;
             --price-color: #2c5282;
             --border-color: #cbd5e1;
             --btn-green: #58A83E; 
             --btn-green-hover: #3F8A2E;
-        }
-
-        #section-3 {
+            
             font-family: var(--font-sans);
             color: var(--text-dark);
-            overflow-x: hidden;
-            background-color: var(--bg-color-hero);
         }
 
         #section-3 .hero-section {
             position: relative;
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 5%;
-            background-color: var(--bg-color-hero);
+            padding: 40px 3%;
         }
 
         #section-3 .container {
@@ -228,6 +251,11 @@
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        body.dark-mode #section-3 .img-box {
+            background-color: #1E1A17;
+            border: 1px solid #3E3731;
+        }
+
         #section-3 .img-box img {
             width: 100%;
             height: 100%;
@@ -262,14 +290,13 @@
         }
 
         #section-3 .text-content h1 {
-            font-family: 'Inter', sans-serif;
             font-weight: 800;
             font-size: 3.2rem;
             line-height: 1.15;
             margin-bottom: 10px;
             display: flex;
             flex-wrap: wrap;
-            background: linear-gradient(110deg, #111111 20%, #58A83E 50%, #111111 80%);
+            background: linear-gradient(110deg, var(--text-dark) 20%, #58A83E 50%, var(--text-dark) 80%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
@@ -294,7 +321,6 @@
         #section-3 .text-content h2 {
             font-size: 1.25rem;
             font-weight: 500;
-            color: #333;
             margin-bottom: 20px;
         }
 
@@ -390,11 +416,10 @@
            2. STYLES UNTUK BAGIAN BAWAH (BAKERY MENU)
            ========================================================= */
         #section-3 .menu-section {
-            background-color: var(--bg-color-menu);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px;
+            padding: 40px 3%;
         }
 
         #section-3 .menu-container {
@@ -419,6 +444,11 @@
             background-color: #e2e8f0;
             overflow: hidden;
             flex-shrink: 0;
+        }
+
+        body.dark-mode #section-3 .menu-image {
+            background-color: #1E1A17;
+            border: 1px solid #3E3731;
         }
 
         #section-3 .menu-image img {
@@ -446,7 +476,6 @@
             font-size: 0.8rem;
             color: var(--menu-text-muted);
             line-height: 1.4;
-            animation: none; /* Reset animation from Foodeza */
         }
 
         #section-3 .menu-price-action {
@@ -460,6 +489,10 @@
             font-size: 0.95rem;
             color: var(--price-color);
             min-width: 75px;
+        }
+
+        body.dark-mode #section-3 .menu-price {
+            color: #90cdf4;
         }
 
         #section-3 .order-btn {
@@ -480,18 +513,14 @@
         #section-3 .order-btn:hover {
             background-color: var(--btn-green-hover);
         }
-    
 </style>
 
 <style>
-
         #section-4, #section-4 * {
             font-family: 'Inter', sans-serif;
         }
 
         #section-4 {
-            background-color: #ffffff;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
@@ -500,8 +529,7 @@
         /* --- HEADER / TYPOGRAPHY --- */
         #section-4 .header {
             text-align: center;
-            margin-top: 60px;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         #section-4 .header h1 {
@@ -515,6 +543,14 @@
             -webkit-background-clip: text;
             background-clip: text;
             animation: s4-shine 3s linear infinite;
+        }
+
+        body.dark-mode #section-4 .header h1 {
+            background: linear-gradient(110deg, #F8F6F0 20%, #58A83E 50%, #F8F6F0 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
         }
 
         @keyframes s4-shine {
@@ -532,10 +568,14 @@
         }
 
         #section-4 .highlight {
-            background-color: #E7F3DE; /* Hijau muda (grass tint) */
+            background-color: #E7F3DE; 
             padding: 0px 25px;
             border-radius: 50px;
             display: inline-block;
+        }
+
+        body.dark-mode #section-4 .highlight {
+            background-color: #1F4A15;
         }
 
         /* --- MAIN LAYOUT --- */
@@ -546,14 +586,14 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin: 50px 0;
+            margin: 20px 0;
             min-height: 400px;
         }
 
-        /* --- SHOWCASE AREA (PILL BACKGROUND + CAROUSEL) --- */
+        /* --- SHOWCASE AREA --- */
         #section-4 .showcase-container {
             position: relative;
-            width: 85%; /* Area dibuat lebih lebar karena sidebar hilang */
+            width: 85%;
             max-width: 1200px;
             display: flex;
             justify-content: center;
@@ -563,12 +603,16 @@
         /* Background Pill Shape */
         #section-4 .pill-bg {
             width: 100%;
-            height: 220px; /* Tetap pendek sesuai permintaan sebelumnya */
+            height: 220px; 
             background-color: #d8cec4; 
             border-radius: 150px;
             position: relative;
             display: flex;
             justify-content: center;
+        }
+
+        body.dark-mode #section-4 .pill-bg {
+            background-color: #2D2622;
         }
 
         #section-4 .tags-container {
@@ -580,23 +624,13 @@
             z-index: 1;
         }
 
-        #section-4 .tag {
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 6px 20px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- 3D CAROUSEL SCALING EFFECT --- */
+        /* --- 3D CAROUSEL --- */
         #section-4 .carousel-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%; /* Menyesuaikan 100% selebar pill background */
+            width: 100%; 
             height: 400px; 
             pointer-events: none;
         }
@@ -605,15 +639,13 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 100%; /* Memanjang persis seperti lebar pill-bg */
+            width: 100%;
             height: 100%;
             margin-top: -200px; 
             margin-left: -50%; 
             display: flex;
             justify-content: center;
             align-items: flex-end; 
-            
-            /* EFEK TRANSISI SCALE & SLIDE */
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
                         opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
                         z-index 0.8s;
@@ -622,38 +654,32 @@
         }
 
         #section-4 .slide img {
-            width: 100%; /* Memaksa gambar selebar containernya (pill bg) */
+            width: 100%;
             height: 100%;
-            object-fit: contain; /* Memastikan rasio gambar terjaga */
-            object-position: bottom; /* Mengatur gambar agar selalu nempel di bawah */
+            object-fit: contain; 
+            object-position: bottom; 
             pointer-events: auto;
             filter: drop-shadow(0px 30px 25px rgba(0,0,0,0.35));
         }
 
         /* --- STATE SLIDER --- */
-        
-        /* Posisi Tengah (Aktif) - Ukuran Sesuai Pill Background */
         #section-4 .slide.active {
             transform: translateX(0) scale(1);
             opacity: 1;
             z-index: 5;
         }
-
-        /* Posisi Kiri - Ukuran Mengecil */
         #section-4 .slide.prev {
             transform: translateX(-50%) scale(0.6);
             opacity: 0.4;
             z-index: 2;
         }
-
-        /* Posisi Kanan - Ukuran Mengecil */
         #section-4 .slide.next {
             transform: translateX(50%) scale(0.6);
             opacity: 0.4;
             z-index: 2;
         }
 
-        /* --- BOTTOM FOOTER / CONTROLS --- */
+        /* --- BOTTOM FOOTER --- */
         #section-4 .footer-controls {
             display: flex;
             justify-content: flex-end;
@@ -669,9 +695,13 @@
             font-size: 0.95rem;
             font-weight: 500;
         }
+        
+        body.dark-mode #section-4 .explore-link {
+            color: #F8F6F0;
+        }
 
         #section-4 .btn-work {
-            background-color: #2E6B1E; /* Hijau tua (grass deep) */
+            background-color: #2E6B1E; 
             color: #fff;
             text-decoration: none;
             padding: 14px 35px;
@@ -684,19 +714,14 @@
         #section-4 .btn-work:hover {
             background-color: #31572c;
         }
-
-    
 </style>
 
 <style>
-
     #section-5 {
-      background-color: #f2f2f5;
       font-family: 'Inter', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       overflow: hidden;
     }
 
@@ -708,7 +733,6 @@
       max-width: 500px;
     }
 
-    /* Container Kartu Stack */
     #section-5 .carousel-container {
       position: relative;
       width: 100%;
@@ -718,7 +742,6 @@
       align-items: center;
     }
 
-    /* Styling Kartu 9:16 */
     #section-5 .card {
       position: absolute;
       width: 230px;
@@ -726,7 +749,6 @@
       border-radius: 22px;
       overflow: hidden;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-      /* Transisi pergeseran & perpindahan smooth */
       transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
                   opacity 0.8s ease, 
                   filter 0.8s ease;
@@ -743,33 +765,25 @@
       pointer-events: none;
     }
 
-    /* POSISI 3 KARTU (Tengah, Kiri, Kanan) */
-    
-    /* 1. Kartu Utama (Depan / Tengah) */
+    /* POSISI 3 KARTU */
     #section-5 .card.active {
       transform: translateX(0) scale(1);
       z-index: 3;
       opacity: 1;
       filter: brightness(1);
     }
-
-    /* 2. Kartu Belakang Kiri (Mengintip dari kiri) */
     #section-5 .card.prev {
       transform: translateX(-48%) scale(0.85);
       z-index: 2;
       opacity: 0.9;
       filter: brightness(0.9);
     }
-
-    /* 3. Kartu Belakang Kanan (Mengintip dari kanan) */
     #section-5 .card.next {
       transform: translateX(48%) scale(0.85);
       z-index: 2;
       opacity: 0.9;
       filter: brightness(0.9);
     }
-
-    /* Kartu lain yang tersembunyi */
     #section-5 .card.hidden {
       transform: translateX(0) scale(0.7);
       z-index: 1;
@@ -777,7 +791,6 @@
       pointer-events: none;
     }
 
-    /* Indikator Tombol Kapsul Bawah */
     #section-5 .indicator-pill {
       margin-top: 25px;
       background-color: #e5e5ea;
@@ -791,32 +804,31 @@
       gap: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
+    
+    body.dark-mode #section-5 .indicator-pill {
+        background-color: #2D2622;
+        color: #F8F6F0;
+    }
 
     #section-5 .indicator-number {
       color: #888;
     }
-  
 </style>
 
 <style>
-
         #section-6 {
             margin: 0;
-            padding: 0;
-            background-color: #e5ecdf; 
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
             align-items: center;
             justify-content: center;
         }
 
         #section-6 .outer-wrapper {
-            background-color: #e5ecdf;
             width: 90%;
             max-width: 1100px;
-            padding: 90px 40px;
+            padding: 50px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -843,6 +855,7 @@
             border-radius: 24px;
             overflow: hidden; 
             z-index: 0;
+            transition: background-color 0.3s ease;
         }
 
         #section-6 .inner-card-bg::before {
@@ -913,19 +926,19 @@
         #section-6 .phone-wrapper {
             position: absolute;
             right: 40px;
-            bottom: 0; /* Pas di garis bawah container hijau */
+            bottom: 0;
             width: 320px;
-            height: 380px; /* Tingginya diset agar HP menonjol ke atas */
-            overflow: hidden; /* MEMOTONG bagian bawah HP yang melebihi 380px */
+            height: 380px; 
+            overflow: hidden; 
             z-index: 2;
         }
 
         #section-6 .phone-mockup {
             position: absolute;
-            top: 20px; /* Posisi HP diatur sedikit dari atas agar proporsional */
-            left: 25px; /* Center manual ke tengah wrapper */
+            top: 20px; 
+            left: 25px; 
             width: 270px;
-            height: 580px; /* Tinggi asli HP, karena wrapper lebih pendek, bawahnya akan kepotong otomatis */
+            height: 580px; 
             background-color: #000000;
             border: 3px solid #737373; 
             padding: 6px; 
@@ -963,7 +976,6 @@
             letter-spacing: 0.5px;
             opacity: 0.8;
         }
-    
 </style>
 
 </head>
@@ -971,9 +983,8 @@
 
 <section id="section-1" class="site-section antialiased overflow-x-hidden">
 
-
-    <!-- NAVBAR -->
-    <nav class="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+    <!-- NAVBAR (SUDAH DIHAPUS BAGIAN YANG TIDAK PERLU & GAP DI KECILKAN) -->
+    <nav class="w-full max-w-7xl mx-auto px-3 py-4 flex justify-between items-center">
         <!-- Logo & Menu Container -->
         <div class="flex bg-[#1E1A17] text-white rounded-full px-2 py-2 items-center w-full max-w-5xl mx-auto justify-between shadow-lg">
             <a href="#section-1" class="flex items-center gap-2 pl-4 cursor-pointer">
@@ -983,11 +994,7 @@
             
             <div class="flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#section-1" class="text-[#58A83E] hover:text-[#58A83E] transition">Home</a>
-                <a href="#section-2" class="hover:text-white transition">Services</a>
-                <a href="#section-3" class="hover:text-white transition">Projects</a>
-                <a href="#section-4" class="hover:text-white transition">Blogs</a>
-                <a href="#section-5" class="hover:text-white transition">About Me</a>
-                <a href="#section-6" class="hover:text-white transition">Testimonials</a>
+                <!-- Link lain dihapus sesuai permintaan -->
             </div>
 
             <!-- Dark/Light Mode Button -->
@@ -1007,7 +1014,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="max-w-7xl mx-auto px-6 pt-12 pb-24 relative flex flex-col items-center text-center">
+    <section class="max-w-7xl mx-auto px-3 py-6 relative flex flex-col items-center text-center">
         
         <!-- Subtitle Badge -->
         <div class="bg-white border border-gray-200 shadow-sm py-2 px-4 rounded-full flex items-center gap-2 mb-6">
@@ -1121,7 +1128,7 @@
     </div>
 
     <!-- SERVICES SECTION -->
-    <section class="max-w-5xl mx-auto px-6 py-24">
+    <section class="max-w-5xl mx-auto px-3 py-10">
         <div class="flex items-center gap-2 mb-2">
             <span class="w-3 h-3 bg-[#58A83E] rounded-full"></span>
             <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">My Services</span>
@@ -1160,24 +1167,20 @@
 
 </section>
 
-<section id="section-2" class="site-section bg-[#e2e2e5] flex items-center justify-center p-6 select-none">
-
+<section id="section-2" class="site-section flex items-center justify-center px-3 py-6 select-none">
 
   <!-- Main Canvas Container -->
-  <div class="relative w-full max-w-[1080px] bg-[#f5f5f7] rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-center min-h-[600px] p-14">
+  <div class="relative w-full max-w-[1080px] bg-[#f5f5f7] rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-center p-8">
 
     <!-- 1. Hero Section -->
     <div class="relative z-10 grid grid-cols-12 gap-8 items-center">
 
-      <!-- Left Hero: Image Slider 3:4 (Tanpa Frame) -->
+      <!-- Left Hero: Image Slider 3:4 -->
       <div class="col-span-5 flex items-center justify-center">
         
-        <!-- Slider Container (Aspect Ratio 3:4) -->
         <div class="relative w-full max-w-[300px] aspect-[3/4] rounded-2xl shadow-xl overflow-hidden bg-zinc-200 group" id="slider-container">
           
-          <!-- Slider Track -->
           <div id="slider-track" class="flex w-full h-full transition-transform duration-500 ease-in-out">
-            <!-- SLIDE 1: Isi URL di src -->
             <div class="w-full h-full flex-shrink-0 relative bg-zinc-300">
               <img src="https://www.image2url.com/r2/default/gifs/1789350318343-a11adc25-1473-43ed-971f-3236a6c451e8.gif" alt="Salad 1" class="slide-img w-full h-full object-cover hidden" />
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-gray-500 placeholder-content">
@@ -1185,7 +1188,6 @@
                 <span class="text-[10px] font-bold uppercase tracking-widest">Slide 1 (3:4)</span>
               </div>
             </div>
-            <!-- SLIDE 2: Isi URL di src -->
             <div class="w-full h-full flex-shrink-0 relative bg-zinc-200">
               <img src="https://www.image2url.com/r2/default/gifs/1789351631149-cc7e4bd8-dca7-4a2d-be7c-b0f40e30e363.gif" alt="Salad 2" class="slide-img w-full h-full object-cover hidden" />
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-gray-500 placeholder-content">
@@ -1193,7 +1195,6 @@
                 <span class="text-[10px] font-bold uppercase tracking-widest">Slide 2 (3:4)</span>
               </div>
             </div>
-            <!-- SLIDE 3: Isi URL di src -->
             <div class="w-full h-full flex-shrink-0 relative bg-zinc-300">
               <img src="https://www.image2url.com/r2/default/gifs/1789352694089-51b360f1-030b-455f-9a39-84b5ca948a2b.gif" alt="Salad 3" class="slide-img w-full h-full object-cover hidden" />
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-gray-500 placeholder-content">
@@ -1203,7 +1204,6 @@
             </div>
           </div>
 
-          <!-- Slider Dots Navigation -->
           <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
             <button class="slider-dot w-2 h-2 rounded-full bg-white transition-all shadow-sm" onclick="section2GoToSlide(0)"></button>
             <button class="slider-dot w-2 h-2 rounded-full bg-white/50 transition-all shadow-sm" onclick="section2GoToSlide(1)"></button>
@@ -1213,27 +1213,22 @@
         </div>
       </div>
 
-      <!-- Right Hero: Judul, Info, Badges, Harga Diskon -->
+      <!-- Right Hero -->
       <div class="col-span-7 pl-6 flex flex-col justify-center">
         
-        <!-- Premium Best Seller Badge (Minimalist) -->
         <div class="mb-4">
           <span class="inline-flex items-center gap-1.5 border border-[#2E6B1E] text-[#2E6B1E] bg-transparent px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
             <i class="fas fa-star text-[9px]"></i> Best Seller
           </span>
         </div>
 
-        <!-- Animated Title (Generated via JS per letter) -->
         <h1 id="animated-title" class="text-[56px] font-extrabold tracking-tight lowercase mb-4 title-gradient leading-tight flex flex-wrap">
-          <!-- Teks di-inject dari JavaScript -->
         </h1>
 
-        <!-- Deskripsi -->
         <p class="text-sm text-gray-600 max-w-[420px] leading-relaxed mb-5 font-medium">
           Beyond The WBook adalah akses lengkap untuk kamu yang ingin serius membangun karier remote. Bukan cuma WBook, tapi juga webinar rutin, rekaman materi, komunitas aktif, mentoring, review CV & portfolio, dan berbagai resources yang terus berkembang.
         </p>
 
-        <!-- 5 Pill Badges (Bonus/Poin Penting) -->
         <div class="flex flex-wrap gap-2 mb-8 max-w-[480px]">
           <span class="px-3.5 py-1.5 bg-emerald-50 text-[#2E6B1E] text-[10px] font-bold rounded-full border border-emerald-200 shadow-sm">Lifetime Access</span>
           <span class="px-3.5 py-1.5 bg-emerald-50 text-[#2E6B1E] text-[10px] font-bold rounded-full border border-emerald-200 shadow-sm">Always Updated</span>
@@ -1242,7 +1237,6 @@
           <span class="px-3.5 py-1.5 bg-emerald-50 text-[#2E6B1E] text-[10px] font-bold rounded-full border border-emerald-200 shadow-sm">Mentoring & Support</span>
         </div>
 
-        <!-- Price & Action Button -->
         <div class="flex items-center space-x-8">
           <div class="flex flex-col">
             <span class="text-gray-400 line-through text-sm font-semibold mb-0.5">Rp 349.000</span>
@@ -1258,19 +1252,16 @@
 
     </div>
 
-    <!-- 2. Bottom Section: Product Cards Grid (3 Kotak - Teks Utuh & Gambar Perbesar) -->
+    <!-- 2. Bottom Section: Product Cards Grid -->
     <div class="relative z-20 mt-16">
       <div class="grid grid-cols-3 gap-8">
 
-        <!-- Card 1: Asparagus wild -->
         <div class="relative pt-16 mt-2">
-          <!-- Image Rasio 4:3 (Ukuran w-44) -->
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789356872626-3e13dbce-b460-4b86-96e2-86e19618b9ba.gif" alt="Asparagus wild" class="bottom-card-img w-full h-full object-cover hidden" />
             <i class="fas fa-utensils text-gray-400 text-2xl placeholder-icon"></i>
           </div>
 
-          <!-- Card Body: Fleksibel tanpa pemotongan teks -->
           <div class="bg-[#FAF9F6] rounded-3xl p-5 pt-20 flex flex-col items-center text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow min-h-[190px]">
             <h3 class="text-base font-bold text-gray-800 mb-1.5 w-full">Private Remote Work Session</h3>
             <p class="text-xs text-gray-500 leading-relaxed mb-4 px-1">
@@ -1281,7 +1272,6 @@
           </div>
         </div>
 
-        <!-- Card 2: Chicken salad -->
         <div class="relative pt-16 mt-2">
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789358246753-d116aaad-464f-4664-8137-7246ce5b3e87.gif" alt="Chicken salad" class="bottom-card-img w-full h-full object-cover hidden" />
@@ -1298,7 +1288,6 @@
           </div>
         </div>
 
-        <!-- Card 3: Salmon salad -->
         <div class="relative pt-16 mt-2">
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789358855720-4b5d91c9-004c-4a7d-9324-e27d267e2c70.gif" alt="Salmon salad" class="bottom-card-img w-full h-full object-cover hidden" />
@@ -1360,7 +1349,6 @@
 <!-- ========================================== -->
 
 <section id="section-3" class="site-section">
-
 
     <!-- ==========================================
          BAGIAN ATAS: FOODEZA HERO SECTION
@@ -1489,7 +1477,6 @@
 
 <section id="section-4" class="site-section">
 
-
     <!-- Header Typography -->
     <header class="header">
         <h1>
@@ -1541,7 +1528,6 @@
 
 <section id="section-5" class="site-section">
 
-
   <div class="carousel-wrapper">
     <div class="carousel-container" id="carousel">
       
@@ -1580,7 +1566,6 @@
 </section>
 
 <section id="section-6" class="site-section">
-
 
     <div class="outer-wrapper">
         <div class="inner-container">
@@ -1621,9 +1606,9 @@
 <script>
 (function(){
 
-        // 1. Dark / Light Mode Toggle
+        // 1. Dark / Light Mode Toggle (DIUBAH KE GLOBAL BODY)
         const themeToggle = document.getElementById('theme-toggle');
-        const body = document.getElementById('section-1');
+        const body = document.body; // Sekarang targetnya adalah global body
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
@@ -1822,7 +1807,6 @@
       }
     });
   
-
     window.section2GoToSlide = goToSlide;
 })();
 </script>
@@ -1958,37 +1942,29 @@
 </script>
 
 <script>
-
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('#section-4 .slide');
             let currentIndex = 0;
             const totalSlides = slides.length;
 
             function updateCarousel() {
-                // Hilangkan semua state class
                 slides.forEach(slide => {
                     slide.classList.remove('active', 'prev', 'next');
                 });
 
-                // Tentukan index Kiri & Kanan
                 let prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                 let nextIndex = (currentIndex + 1) % totalSlides;
 
-                // Set class berdasarkan posisi terbaru
-                slides[currentIndex].classList.add('active'); // Tengah
-                slides[nextIndex].classList.add('next');      // Kanan
-                slides[prevIndex].classList.add('prev');      // Kiri
+                slides[currentIndex].classList.add('active'); 
+                slides[nextIndex].classList.add('next');      
+                slides[prevIndex].classList.add('prev');      
                 
-                // Iterasi ke slide selanjutnya
                 currentIndex = (currentIndex + 1) % totalSlides;
             }
 
-            // Ganti slide setiap 3.5 detik
             setInterval(updateCarousel, 3500);
         });
     
-        // Animasi judul "build your personal brand" - samakan dengan efek
-        // shine + melayang per-huruf milik judul "healthy salad" (Section 2)
         document.addEventListener('DOMContentLoaded', () => {
             const s4Parts = [
                 { id: 's4-part1', text: 'build your' },
@@ -2015,7 +1991,6 @@
                 });
             });
         });
-
 </script>
 
 <script>
@@ -2036,62 +2011,49 @@
         card.className = 'card';
         const video = card.querySelector('video');
 
-        // Menghitung urutan posisi kartu relatif terhadap kartu aktif
         let diff = (i - currentIndex + total) % total;
 
         if (diff === 0) {
-          // Kartu Aktif di Tengah
           card.classList.add('active');
-          if (video) video.play();
-        } else if (diff === 1) {
-          // Kartu di Belakang Kanan
-          card.classList.add('next');
-          if (video) video.pause();
+          if (video) {
+            video.currentTime = 0;
+            video.play().catch(e => console.log("Autoplay dicegah:", e));
+          }
         } else if (diff === total - 1) {
-          // Kartu di Belakang Kiri
           card.classList.add('prev');
           if (video) video.pause();
+        } else if (diff === 1) {
+          card.classList.add('next');
+          if (video) video.pause();
         } else {
-          // Kartu Sisa yang Tersembunyi
           card.classList.add('hidden');
           if (video) video.pause();
         }
       });
 
-      // Update Teks Indikator Bawah
-      numEl.textContent = String(currentIndex + 1).padStart(2, '0');
-      textEl.textContent = labels[currentIndex % labels.length];
+      numEl.textContent = "0" + (currentIndex + 1);
+      textEl.textContent = labels[currentIndex];
     }
 
-    // Fungsi Pindah ke Kartu Selanjutnya
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % cards.length;
-      updateCarousel();
-    }
-
-    // Pindah Otomatis (Auto Play Loop)
-    function startAutoPlay() {
-      stopAutoPlay();
-      autoPlayInterval = setInterval(nextSlide, 2800); // Berpindah otomatis setiap 2.8 detik
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayInterval) clearInterval(autoPlayInterval);
-    }
-
-    // Klik pada kartu untuk langsung beralih
-    cards.forEach((card, i) => {
+    cards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        currentIndex = i;
+        clearInterval(autoPlayInterval);
+        currentIndex = index;
         updateCarousel();
-        startAutoPlay(); // Reset timer saat diklik manual
+        startAutoPlay();
       });
     });
 
-    // Jalankan pertama kali
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+      }, 3500); 
+    }
+
     updateCarousel();
     startAutoPlay();
-  
+
 })();
 </script>
 
