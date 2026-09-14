@@ -2,17 +2,14 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<!-- Mengunci lebar viewport ke 1200px agar tampilan HP tampil persis seperti Desktop versi proporsional kecil -->
-<meta name="viewport" content="width=1200, initial-scale=0.3, maximum-scale=3.0, user-scalable=yes">
+<!-- Mengubah viewport agar responsive di HP, namun CSS di bawah akan mengunci layout desktop di layar besar -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
 <title>Ajengwahys</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -24,20 +21,20 @@
 
   html {
     scroll-behavior: smooth;
-    font-size: 17.5px; /* Memperbesar ukuran semua elemen proporsional sebesar ~1.5px */
   }
 
-  /* Global Body (Satu Kesatuan Background) */
-  body {
+  html, body {
     width: 100%;
-    min-width: 1200px;
     overflow-x: hidden;
-    background-color: #F8F6F0;
-    color: #1E1A17;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Pengaturan Jarak/Gap Seragam Untuk Semua Section */
+  /* Mengunci tampilan Desktop persis seperti sebelumnya */
+  @media (min-width: 769px) {
+    html, body {
+      min-width: 1200px;
+    }
+  }
+
   .site-section {
     position: relative;
     display: block;
@@ -45,64 +42,102 @@
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
-    padding: 40px 0; /* Gap atas & bawah yang seragam */
   }
 
-  /* =========================================================
-     GLOBAL DARK MODE OVERRIDES
-     ========================================================= */
-  body.dark-mode {
-      background-color: #121212 !important;
-      color: #F8F6F0 !important;
+  .site-section + .site-section {
+    margin-top: 56px;
   }
-  
-  body.dark-mode .bg-white,
-  body.dark-mode .bg-\[\#f5f5f7\],
-  body.dark-mode .bg-\[\#FAF9F6\],
-  body.dark-mode .bg-zinc-200 {
-      background-color: #1E1A17 !important;
-      color: #F8F6F0 !important;
-      border-color: #3E3731 !important;
-  }
-  
-  body.dark-mode .text-\[\#1E1A17\], 
-  body.dark-mode .text-gray-800 {
-      color: #F8F6F0 !important;
-  }
-  
-  body.dark-mode .text-gray-600, 
-  body.dark-mode .text-gray-500 {
-      color: #A3A3A3 !important;
-  }
-  
-  body.dark-mode svg {
-      fill: #F8F6F0;
-  }
-  
-  /* Section 3 Dark Mode Variables */
-  body.dark-mode #section-3 {
-      --text-dark: #F8F6F0;
-      --text-gray: #A3A3A3;
-      --menu-text-dark: #F8F6F0;
-      --menu-text-muted: #A3A3A3;
-  }
-  
-  /* Section 6 Dark Mode Texts */
-  body.dark-mode #section-6 .content-left h1,
-  body.dark-mode #section-6 .content-left p {
-      color: #F8F6F0 !important;
-  }
-  body.dark-mode #section-6 .inner-card-bg {
-      background-color: #1F4A15 !important;
-  }
+</style>
+
+<style>
+/* =========================================================
+    MOBILE RESPONSIVE OVERRIDES (Maks 768px)
+    HANYA BERLAKU DI HANDPHONE - DESKTOP TIDAK BERUBAH
+========================================================= */
+@media (max-width: 768px) {
+    /* 1. Navigasi Header */
+    nav { flex-direction: column !important; padding: 15px !important; gap: 15px; }
+    nav > div:first-child { 
+        width: 100% !important; max-width: 100% !important; 
+        padding: 10px 20px !important; flex-wrap: wrap; justify-content: space-between; 
+    }
+    nav > div > div:nth-child(2) { display: none; /* Sembunyikan menu teks agar blok hitam pendek */ }
+    nav > .ml-4 { margin-left: 0 !important; }
+
+    /* 2. Hero Section */
+    .max-w-4xl { display: flex !important; flex-direction: column !important; align-items: center; }
+    .absolute.left-0.top-1\/4, .absolute.right-0.top-1\/4 {
+        position: relative !important; top: auto !important; left: auto !important; right: auto !important;
+        text-align: center !important;
+    }
+    /* Susunan: Follow Me -> Foto -> Teks 7+ Years */
+    .max-w-4xl > div:nth-child(2) { order: 2; margin-top: 20px; transform: scale(1.03); } /* Foto naik +3px ukurannya */
+    .max-w-4xl > div:nth-child(1) { order: 1; margin-top: 10px; } 
+    .max-w-4xl > div:nth-child(1) p { font-size: 16px !important; } /* Teks follow me membesar */
+    .max-w-4xl > div:nth-child(1) .flex { justify-content: center; }
+    
+    .max-w-4xl > div:nth-child(3) { order: 3; margin-top: 50px; display: flex; flex-direction: column; align-items: center !important; }
+    .max-w-4xl > div:nth-child(3) .items-end { align-items: center !important; }
+    .max-w-4xl > div:nth-child(3) p { max-width: 100%; text-align: center; margin-bottom: 15px; font-size: 15px !important; }
+
+    /* 3. Which path is right for you */
+    .mb-12 h2 { transform: translateY(-2px) !important; font-size: 2.2rem !important; text-align: center; }
+    .mb-12 { flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 15px; }
+
+    /* 4. Section Best Seller */
+    #section-2 .grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    #animated-title { 
+        font-size: 42px !important; 
+        transform: translateY(-1px) !important; /* Naik 1px */
+        visibility: visible !important; 
+        color: #111 !important; /* Fix agar teks terlihat di HP */
+        -webkit-text-fill-color: #111 !important;
+        background: none !important;
+        justify-content: center;
+    }
+    #section-2 .col-span-7 { padding-left: 0 !important; margin-top: 20px; align-items: center; text-align: center; }
+    #section-2 .space-x-8 { flex-direction: column !important; space-x: 0 !important; gap: 15px; } /* Button Join di bawah harga */
+    #slider-container { transform: scale(1.05) !important; } /* Slide 3 image perbesar */
+    #section-2 .grid-cols-3 { grid-template-columns: 1fr !important; gap: 40px !important; } /* 3 Produk menurun */
+    #section-2 .grid-cols-3 > div { transform: scale(1.03) !important; } /* 3 Produk perbesar +3px */
+    #section-2 .flex-wrap { justify-content: center; }
+
+    /* 5. Flier Workshop */
+    .flier-image { transform: scale(1.05) !important; margin-bottom: 15px; }
+
+    /* 6. Section Foodeza Kolase */
+    #section-3 .container { flex-direction: column !important; align-items: center; gap: 40px; padding: 20px; }
+    #section-3 .gallery-wrapper { margin-left: 15px !important; transform: scale(1.05) !important; } /* Geser kanan dikit & perbesar */
+    #section-3 .text-content { text-align: center; }
+    #section-3 .text-content h1, #section-3 .text-content h2 { font-size: calc(100% + 2px) !important; justify-content: center; } /* Naik 2px */
+    #section-3 .text-content p { font-size: calc(100% + 2px) !important; }
+    #section-3 .price-box { justify-content: center; }
+    #section-3 .btn-group { justify-content: center; }
+
+    /* 7. Section Bakery Menu */
+    #section-3 .menu-container { grid-template-columns: 1fr !important; gap: 30px; } /* 1 Kolom menurun */
+    #section-3 .menu-item { transform: scale(1.05) !important; } /* Perbesar menu */
+
+    /* 8. Section Build Your Brand */
+    #section-4 .header h1 { 
+        color: #111111 !important; /* Teks jadi hitam di HP */
+        -webkit-text-fill-color: #111111 !important; 
+        background: none !important;
+    }
+    #section-4 .carousel-wrapper { transform: scale(0.9) !important; } /* Perkecil slider sedikit */
+    #section-4 .footer-controls { justify-content: center !important; }
+
+    .site-section + .site-section { margin-top: 30px !important; }
+}
 </style>
 
 <style>
         #section-1 {
             font-family: 'Inter', sans-serif;
+            background-color: #F8F6F0;
+            color: #1E1A17;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        /* Animasi Jatuh & Numbuk Tegas (Infinite) untuk "Ajengwahys" */
         @keyframes s1-firmHit {
             0%, 100% { transform: translateY(0); }
             10% { transform: translateY(-18px); animation-timing-function: ease-out; } 
@@ -114,8 +149,24 @@
             display: inline-block;
             animation: s1-firmHit 3s infinite;
         }
-
-        /* Efek kedip kursor typewriter */
+        #section-1.dark-mode {
+            background-color: #121212;
+            color: #F8F6F0;
+        }
+        #section-1.dark-mode .bg-white {
+            background-color: #1E1A17 !important;
+            color: #F8F6F0 !important;
+            border-color: #2D2622 !important;
+        }
+        #section-1.dark-mode .text-\[\#1E1A17\] {
+            color: #F8F6F0 !important;
+        }
+        #section-1.dark-mode .text-gray-600 {
+            color: #A3A3A3 !important;
+        }
+        #section-1.dark-mode svg {
+            fill: #F8F6F0;
+        }
         @keyframes s1-blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -123,8 +174,6 @@
         #section-1 .cursor-blink {
             animation: s1-blink 1s step-end infinite;
         }
-        
-        /* Sembunyikan scrollbar tapi tetap bisa di-scroll */
         #section-1 .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -138,8 +187,6 @@
     #section-2 {
       font-family: 'Inter', sans-serif;
     }
-
-    /* Efek Sapuan Warna Hijau untuk Wrapper Teks */
     #section-2 .title-gradient {
       background: linear-gradient(110deg, #111111 20%, #40916c 50%, #111111 80%);
       background-size: 200% auto;
@@ -148,32 +195,17 @@
       background-clip: text;
       animation: s2-shine 3s linear infinite;
     }
-
-    /* Dark Mode title gradient adjustment for section-2 */
-    body.dark-mode #section-2 .title-gradient {
-      background: linear-gradient(110deg, #F8F6F0 20%, #58A83E 50%, #F8F6F0 80%);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
     @keyframes s2-shine {
       to { background-position: 200% center; }
     }
-
-    /* Efek Melayang Per Huruf */
     #section-2 .letter-anim {
       display: inline-block;
       animation: s2-floatLetter 2.5s ease-in-out infinite;
     }
-
     @keyframes s2-floatLetter {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
-
-    /* Hide scrollbar for slider */
     #section-2 .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -184,35 +216,33 @@
 </style>
 
 <style>
-        /* =========================================================
-           1. STYLES UNTUK BAGIAN ATAS (FOODEZA INTERACTIVE)
-           ========================================================= */
         #section-3 {
+            --bg-color-hero: #FDF9F3;
             --primary-green: #40916c;
             --text-dark: #1A1A1A;
             --text-gray: #555555;
             --font-sans: 'Inter', sans-serif;
-            
-            /* Variables untuk Bakery Menu di bawah */
+            --bg-color-menu: #fdfaf6;
             --menu-text-dark: #2d3748;
             --menu-text-muted: #8b96a5;
             --price-color: #2c5282;
             --border-color: #cbd5e1;
             --btn-green: #58A83E; 
             --btn-green-hover: #3F8A2E;
-            
             font-family: var(--font-sans);
             color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: var(--bg-color-hero);
         }
-
         #section-3 .hero-section {
             position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 3%;
+            padding: 60px 5%;
+            background-color: var(--bg-color-hero);
         }
-
         #section-3 .container {
             position: relative;
             z-index: 10;
@@ -223,8 +253,6 @@
             width: 100%;
             gap: 80px;
         }
-
-        /* Gallery Layout */
         #section-3 .gallery-wrapper {
             flex: 1;
             display: flex;
@@ -232,14 +260,12 @@
             max-width: 550px;
             position: relative;
         }
-
         #section-3 .gallery-col {
             display: flex;
             flex-direction: column;
             gap: 20px;
             flex: 1;
         }
-
         #section-3 .img-box {
             width: 100%;
             background-color: #E6E0D8;
@@ -250,12 +276,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-
-        body.dark-mode #section-3 .img-box {
-            background-color: #1E1A17;
-            border: 1px solid #3E3731;
-        }
-
         #section-3 .img-box img {
             width: 100%;
             height: 100%;
@@ -263,72 +283,61 @@
             display: block;
             pointer-events: none;
         }
-
         #section-3 .img-1 { height: 320px; }
         #section-3 .img-2 { height: 220px; }
         #section-3 .img-3 { height: 240px; }
         #section-3 .img-4 { height: 300px; }
-
-        /* Active & Dim Effect */
         #section-3 .img-box.active {
             transform: scale(1.08);
             z-index: 10;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             border: 3px solid var(--primary-green);
         }
-
         #section-3 .gallery-wrapper.has-active .img-box:not(.active) {
             opacity: 0.4;
             transform: scale(0.95);
             filter: grayscale(30%);
         }
-
-        /* Text Content Area */
         #section-3 .text-content {
             flex: 1;
             max-width: 500px;
         }
-
         #section-3 .text-content h1 {
+            font-family: 'Inter', sans-serif;
             font-weight: 800;
             font-size: 3.2rem;
             line-height: 1.15;
             margin-bottom: 10px;
             display: flex;
             flex-wrap: wrap;
-            background: linear-gradient(110deg, var(--text-dark) 20%, #58A83E 50%, var(--text-dark) 80%);
+            background: linear-gradient(110deg, #111111 20%, #58A83E 50%, #111111 80%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
             animation: s3-shine 3s linear infinite;
         }
-
         @keyframes s3-shine {
             to { background-position: 200% center; }
         }
-
         #section-3 .text-content h1 span.char {
             display: inline-block;
             animation: s3-floatLetter 2.5s ease-in-out infinite;
         }
-
         @keyframes s3-floatLetter {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-
         #section-3 .text-content h2 {
             font-size: 1.25rem;
             font-weight: 500;
+            color: #333;
             margin-bottom: 20px;
         }
-
         #section-3 .desc-container {
             overflow: hidden;
             margin-bottom: 25px;
         }
-
         #section-3 .text-content p {
             font-size: 0.95rem;
             line-height: 1.8;
@@ -336,13 +345,10 @@
             font-weight: 300;
             animation: s3-slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes s3-slideUpFade {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        /* Price Section */
         #section-3 .price-box {
             display: flex;
             align-items: baseline;
@@ -350,19 +356,16 @@
             margin-bottom: 25px;
             animation: s3-slideUpFade 0.5s ease forwards;
         }
-
         #section-3 .current-price {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary-green);
         }
-
         #section-3 .original-price {
             font-size: 1.1rem;
             color: #999;
             text-decoration: line-through;
         }
-
         #section-3 .discount-badge {
             background-color: #ffebee;
             color: #c62828;
@@ -371,13 +374,10 @@
             padding: 3px 8px;
             border-radius: 4px;
         }
-
-        /* Buttons */
         #section-3 .btn-group {
             display: flex;
             gap: 20px;
         }
-
         #section-3 .btn {
             padding: 12px 35px;
             border-radius: 50px;
@@ -389,39 +389,31 @@
             display: inline-block;
             text-align: center;
         }
-
         #section-3 .btn-primary {
             background-color: var(--primary-green);
             color: white;
             border: 2px solid var(--primary-green);
         }
-
         #section-3 .btn-primary:hover {
             background-color: #1F4A15;
             border-color: #1F4A15;
         }
-
         #section-3 .btn-outline {
             background-color: transparent;
             color: var(--primary-green);
             border: 2px solid var(--primary-green);
         }
-
         #section-3 .btn-outline:hover {
             background-color: var(--primary-green);
             color: white;
         }
-
-        /* =========================================================
-           2. STYLES UNTUK BAGIAN BAWAH (BAKERY MENU)
-           ========================================================= */
         #section-3 .menu-section {
+            background-color: var(--bg-color-menu);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 3%;
+            padding: 80px 20px;
         }
-
         #section-3 .menu-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -430,13 +422,11 @@
             max-width: 900px;
             width: 100%;
         }
-
         #section-3 .menu-item {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         #section-3 .menu-image {
             width: 105px;
             height: 140px;
@@ -445,24 +435,16 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-
-        body.dark-mode #section-3 .menu-image {
-            background-color: #1E1A17;
-            border: 1px solid #3E3731;
-        }
-
         #section-3 .menu-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         #section-3 .menu-details {
             display: flex;
             flex-direction: column;
             flex: 1;
         }
-
         #section-3 .menu-details h3 {
             margin: 0 0 4px 0;
             font-size: 1.05rem;
@@ -470,31 +452,24 @@
             color: var(--menu-text-dark);
             font-family: var(--font-sans);
         }
-
         #section-3 .menu-details p {
             margin: 0 0 12px 0;
             font-size: 0.8rem;
             color: var(--menu-text-muted);
             line-height: 1.4;
+            animation: none;
         }
-
         #section-3 .menu-price-action {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         #section-3 .menu-price {
             font-weight: 700;
             font-size: 0.95rem;
             color: var(--price-color);
             min-width: 75px;
         }
-
-        body.dark-mode #section-3 .menu-price {
-            color: #90cdf4;
-        }
-
         #section-3 .order-btn {
             background-color: var(--btn-green);
             border: none;
@@ -509,7 +484,6 @@
             box-shadow: 0 4px 6px rgba(82, 183, 85, 0.2);
             text-decoration: none;
         }
-
         #section-3 .order-btn:hover {
             background-color: var(--btn-green-hover);
         }
@@ -519,19 +493,18 @@
         #section-4, #section-4 * {
             font-family: 'Inter', sans-serif;
         }
-
         #section-4 {
+            background-color: #ffffff;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
         }
-
-        /* --- HEADER / TYPOGRAPHY --- */
         #section-4 .header {
             text-align: center;
-            padding: 0 10px;
+            margin-top: 60px;
+            padding: 0 20px;
         }
-
         #section-4 .header h1 {
             font-size: 3.2rem;
             font-weight: 800;
@@ -544,41 +517,23 @@
             background-clip: text;
             animation: s4-shine 3s linear infinite;
         }
-
-        body.dark-mode #section-4 .header h1 {
-            background: linear-gradient(110deg, #F8F6F0 20%, #58A83E 50%, #F8F6F0 80%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-
         @keyframes s4-shine {
             to { background-position: 200% center; }
         }
-
         #section-4 .s4-letter {
             display: inline-block;
             animation: s4-floatLetter 2.5s ease-in-out infinite;
         }
-
         @keyframes s4-floatLetter {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-
         #section-4 .highlight {
             background-color: #E7F3DE; 
             padding: 0px 25px;
             border-radius: 50px;
             display: inline-block;
         }
-
-        body.dark-mode #section-4 .highlight {
-            background-color: #1F4A15;
-        }
-
-        /* --- MAIN LAYOUT --- */
         #section-4 .main-content {
             flex: 1;
             position: relative;
@@ -586,21 +541,17 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin: 20px 0;
+            margin: 50px 0;
             min-height: 400px;
         }
-
-        /* --- SHOWCASE AREA --- */
         #section-4 .showcase-container {
             position: relative;
-            width: 85%;
+            width: 85%; 
             max-width: 1200px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        /* Background Pill Shape */
         #section-4 .pill-bg {
             width: 100%;
             height: 220px; 
@@ -610,11 +561,6 @@
             display: flex;
             justify-content: center;
         }
-
-        body.dark-mode #section-4 .pill-bg {
-            background-color: #2D2622;
-        }
-
         #section-4 .tags-container {
             position: absolute;
             top: 30px;
@@ -623,8 +569,15 @@
             justify-content: space-between;
             z-index: 1;
         }
-
-        /* --- 3D CAROUSEL --- */
+        #section-4 .tag {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
         #section-4 .carousel-wrapper {
             position: absolute;
             top: 50%;
@@ -634,12 +587,11 @@
             height: 400px; 
             pointer-events: none;
         }
-
         #section-4 .slide {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 100%;
+            width: 100%; 
             height: 100%;
             margin-top: -200px; 
             margin-left: -50%; 
@@ -652,17 +604,14 @@
             opacity: 0;
             z-index: 0;
         }
-
         #section-4 .slide img {
-            width: 100%;
+            width: 100%; 
             height: 100%;
             object-fit: contain; 
             object-position: bottom; 
             pointer-events: auto;
             filter: drop-shadow(0px 30px 25px rgba(0,0,0,0.35));
         }
-
-        /* --- STATE SLIDER --- */
         #section-4 .slide.active {
             transform: translateX(0) scale(1);
             opacity: 1;
@@ -678,8 +627,6 @@
             opacity: 0.4;
             z-index: 2;
         }
-
-        /* --- BOTTOM FOOTER --- */
         #section-4 .footer-controls {
             display: flex;
             justify-content: flex-end;
@@ -688,18 +635,12 @@
             gap: 30px;
             width: 100%;
         }
-
         #section-4 .explore-link {
             text-decoration: none;
             color: #333;
             font-size: 0.95rem;
             font-weight: 500;
         }
-        
-        body.dark-mode #section-4 .explore-link {
-            color: #F8F6F0;
-        }
-
         #section-4 .btn-work {
             background-color: #2E6B1E; 
             color: #fff;
@@ -710,7 +651,6 @@
             font-weight: 500;
             transition: 0.2s;
         }
-
         #section-4 .btn-work:hover {
             background-color: #31572c;
         }
@@ -718,13 +658,14 @@
 
 <style>
     #section-5 {
+      background-color: #f2f2f5;
       font-family: 'Inter', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
       overflow: hidden;
     }
-
     #section-5 .carousel-wrapper {
       display: flex;
       flex-direction: column;
@@ -732,7 +673,6 @@
       width: 100%;
       max-width: 500px;
     }
-
     #section-5 .carousel-container {
       position: relative;
       width: 100%;
@@ -741,7 +681,6 @@
       justify-content: center;
       align-items: center;
     }
-
     #section-5 .card {
       position: absolute;
       width: 230px;
@@ -756,7 +695,6 @@
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
-
     #section-5 .card video {
       width: 100%;
       height: 100%;
@@ -764,8 +702,6 @@
       display: block;
       pointer-events: none;
     }
-
-    /* POSISI 3 KARTU */
     #section-5 .card.active {
       transform: translateX(0) scale(1);
       z-index: 3;
@@ -790,7 +726,6 @@
       opacity: 0;
       pointer-events: none;
     }
-
     #section-5 .indicator-pill {
       margin-top: 25px;
       background-color: #e5e5ea;
@@ -804,12 +739,6 @@
       gap: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    
-    body.dark-mode #section-5 .indicator-pill {
-        background-color: #2D2622;
-        color: #F8F6F0;
-    }
-
     #section-5 .indicator-number {
       color: #888;
     }
@@ -818,23 +747,25 @@
 <style>
         #section-6 {
             margin: 0;
+            padding: 0;
+            background-color: #e5ecdf; 
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
             align-items: center;
             justify-content: center;
         }
-
         #section-6 .outer-wrapper {
+            background-color: #e5ecdf;
             width: 90%;
             max-width: 1100px;
-            padding: 50px 20px;
+            padding: 90px 40px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
         }
-
         #section-6 .inner-container {
             width: 100%;
             max-width: 950px;
@@ -844,7 +775,6 @@
             align-items: center;
             box-sizing: border-box;
         }
-
         #section-6 .inner-card-bg {
             position: absolute;
             top: 0;
@@ -855,9 +785,7 @@
             border-radius: 24px;
             overflow: hidden; 
             z-index: 0;
-            transition: background-color 0.3s ease;
         }
-
         #section-6 .inner-card-bg::before {
             content: '';
             position: absolute;
@@ -869,14 +797,12 @@
             background-color: rgba(255, 255, 255, 0.12);
             border-radius: 50%;
         }
-
         #section-6 .content-left {
             position: relative;
             z-index: 1;
             max-width: 450px;
             padding: 25px 40px;
         }
-
         #section-6 .content-left h1 {
             font-family: 'Inter', sans-serif;
             font-size: 2.3rem; 
@@ -886,24 +812,20 @@
             margin: 0 0 15px 0;
             letter-spacing: -0.5px;
         }
-
         #section-6 .content-left h1 em {
             font-style: italic;
         }
-
         #section-6 .content-left p {
             font-size: 1rem;
             color: #2b3624;
             line-height: 1.5;
             margin: 0 0 25px 0;
         }
-
         #section-6 .btn-group {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
-
         #section-6 .btn {
             background-color: #000000;
             color: #ffffff;
@@ -917,22 +839,19 @@
             font-weight: 500;
             transition: all 0.2s ease;
         }
-
         #section-6 .btn:hover {
             transform: translateY(-2px);
             background-color: #222;
         }
-
         #section-6 .phone-wrapper {
             position: absolute;
             right: 40px;
-            bottom: 0;
+            bottom: 0; 
             width: 320px;
             height: 380px; 
             overflow: hidden; 
             z-index: 2;
         }
-
         #section-6 .phone-mockup {
             position: absolute;
             top: 20px; 
@@ -946,7 +865,6 @@
             box-shadow: none; 
             box-sizing: border-box;
         }
-
         #section-6 .dynamic-island {
             position: absolute;
             top: 18px;
@@ -958,7 +876,6 @@
             border-radius: 20px;
             z-index: 3;
         }
-
         #section-6 .phone-screen {
             width: 100%;
             height: 100%;
@@ -966,7 +883,6 @@
             border-radius: 36px;
             display: block;
         }
-
         #section-6 .footer-credit {
             text-align: center;
             padding: 20px;
@@ -983,8 +899,8 @@
 
 <section id="section-1" class="site-section antialiased overflow-x-hidden">
 
-    <!-- NAVBAR (SUDAH DIHAPUS BAGIAN YANG TIDAK PERLU & GAP DI KECILKAN) -->
-    <nav class="w-full max-w-7xl mx-auto px-3 py-4 flex justify-between items-center">
+    <!-- NAVBAR -->
+    <nav class="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
         <!-- Logo & Menu Container -->
         <div class="flex bg-[#1E1A17] text-white rounded-full px-2 py-2 items-center w-full max-w-5xl mx-auto justify-between shadow-lg">
             <a href="#section-1" class="flex items-center gap-2 pl-4 cursor-pointer">
@@ -994,7 +910,11 @@
             
             <div class="flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#section-1" class="text-[#58A83E] hover:text-[#58A83E] transition">Home</a>
-                <!-- Link lain dihapus sesuai permintaan -->
+                <a href="#section-2" class="hover:text-white transition">Services</a>
+                <a href="#section-3" class="hover:text-white transition">Projects</a>
+                <a href="#section-4" class="hover:text-white transition">Blogs</a>
+                <a href="#section-5" class="hover:text-white transition">About Me</a>
+                <a href="#section-6" class="hover:text-white transition">Testimonials</a>
             </div>
 
             <!-- Dark/Light Mode Button -->
@@ -1007,14 +927,14 @@
         
         <!-- Let's Talk Button -->
         <div class="ml-4">
-            <a href="https://www.threads.com/messages/t/553511564522743" target="_blank" class="bg-white border-2 border-gray-200 text-black font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition shadow-sm inline-block">
+            <a href="https://www.threads.com/messages/t/553511564522743" target="_blank" class="bg-white border-2 border-gray-200 text-black font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition shadow-sm inline-block text-center">
                 Dm me!
             </a>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="max-w-7xl mx-auto px-3 py-6 relative flex flex-col items-center text-center">
+    <section class="max-w-7xl mx-auto px-6 pt-12 pb-24 relative flex flex-col items-center text-center">
         
         <!-- Subtitle Badge -->
         <div class="bg-white border border-gray-200 shadow-sm py-2 px-4 rounded-full flex items-center gap-2 mb-6">
@@ -1042,14 +962,13 @@
         <!-- Image & Floating Elements Container -->
         <div class="relative w-full max-w-4xl flex justify-center mt-10">
             
-            <!-- Left Side Elements -->
+            <!-- Left Side Elements (Follow Me) -->
             <div class="absolute left-0 top-1/4 block text-left z-20">
-                <p class="text-sm font-bold mb-3">Follow Me On</p>
-                <div class="flex gap-3 mb-10">
+                <p class="text-sm font-bold mb-3 text-center md:text-left">Follow Me On</p>
+                <div class="flex gap-3 mb-10 justify-center md:justify-start">
                     <a href="https://www.instagram.com/Ajengwahys" target="_blank" class="bg-white p-2.5 rounded-full shadow-sm hover:scale-110 transition flex items-center justify-center w-10 h-10 text-gray-800 border border-gray-100">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                    <!-- Threads (Official Scale & Path) -->
                     <a href="https://www.threads.com/@ajengwahys" target="_blank" class="bg-white p-2.5 rounded-full shadow-sm hover:scale-110 transition flex items-center justify-center w-10 h-10 text-black border border-gray-100">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 192 192"><path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 71.396C81.1643 63.2673 88.756 59.5165 97.222 59.5165C97.311 59.5165 97.399 59.5173 97.487 59.5188C113.627 59.6208 123.957 70.8257 124.786 89.2882C118.891 87.0514 112.449 85.8052 105.717 85.8052C79.7915 85.8052 61.644 100.941 61.644 122.052C61.644 140.946 76.541 155.602 96.671 155.602C111.459 155.602 122.607 146.908 126.969 133.567C133.399 152.025 146.526 156.969 155.19 156.969C162.193 156.969 167.365 153.255 170.368 146.124C172.585 140.793 173.344 133.528 173.344 124.621V102.735C173.344 87.6972 168.173 74.0624 158.461 63.3854C148.423 52.3789 135.084 46.745 118.91 46.745C97.915 46.745 80.99 55.454 68.32 72.576C56.12 89.155 49.52 110.283 49.52 135.342C49.52 160.401 56.12 181.529 68.32 198.108C80.99 215.23 97.915 223.939 118.91 223.939C137.935 223.939 153.076 216.516 163.665 202.056C174.522 187.199 179.842 167.067 179.842 142.112V124.621C179.842 133.528 179.083 140.793 176.866 146.124C173.863 153.255 168.691 156.969 161.688 156.969C153.024 156.969 139.897 152.025 133.467 133.567C129.105 146.908 117.957 155.602 103.169 155.602C83.039 155.602 68.142 140.946 68.142 122.052C68.142 100.941 86.2895 85.8052 112.215 85.8052C118.947 85.8052 125.389 87.0514 131.284 89.2882C133.57 97.9719 136.963 103.882 141.537 88.9883ZM114.542 138.995C108.57 138.995 103.493 134.779 103.493 125.109C103.493 115.439 108.57 111.223 114.542 111.223C120.514 111.223 125.591 115.439 125.591 125.109C125.591 134.779 120.514 138.995 114.542 138.995Z"/></svg>
                     </a>
@@ -1060,8 +979,8 @@
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
                 </div>
-                <div class="mt-8 text-left">
-                    <div class="flex items-center gap-2 mb-3">
+                <div class="mt-8 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-3">
                         <h3 class="text-[2.5rem] font-bold text-[#58A83E] leading-none">3,2M<span class="text-xl font-bold">+</span></h3>
                         <div class="flex flex-col leading-tight pt-1">
                             <span class="text-sm font-bold text-[#58A83E]">Thread Views</span>
@@ -1091,13 +1010,13 @@
                 </div>
             </div>
 
-            <!-- Right Side Elements -->
+            <!-- Right Side Elements (7+ Years & Tags) -->
             <div class="absolute right-0 top-1/4 block text-right z-20">
-                <div class="mb-12">
-                    <span class="text-[#58A83E] text-4xl font-serif">“</span>
-                    <p class="text-sm font-bold max-w-[150px] ml-auto text-[#1E1A17]">7+ YEARS OF REMOTE WORK EXPERIENCE, SHARED WITH YOU!</p>
+                <div class="mb-12 text-center md:text-right">
+                    <span class="text-[#58A83E] text-4xl font-serif hidden md:inline">“</span>
+                    <p class="text-sm font-bold max-w-[150px] mx-auto md:ml-auto text-[#1E1A17]">7+ YEARS OF REMOTE WORK EXPERIENCE, SHARED WITH YOU!</p>
                 </div>
-                <div class="flex flex-col gap-3 items-end">
+                <div class="flex flex-col gap-3 items-center md:items-end flex-wrap">
                     <div class="flex gap-2">
                         <span class="bg-[#1E1A17] text-white px-4 py-2 rounded-full text-xs font-bold shadow-md">Community</span>
                         <span class="bg-[#58A83E] text-black px-4 py-2 rounded-full text-xs font-bold shadow-md">Mentoring</span>
@@ -1106,7 +1025,7 @@
                         <span class="bg-[#1E1A17] text-white p-2 rounded-full text-xs shadow-md">✨</span>
                         <span class="bg-[#1E1A17] text-white px-4 py-2 rounded-full text-xs font-bold shadow-md">Remote Work Roadmap</span>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 flex-wrap justify-center md:justify-end">
                         <span class="bg-[#1E1A17] text-white px-4 py-2 rounded-full text-xs font-bold shadow-md">Support</span>
                         <span class="bg-[#58A83E] text-black px-4 py-2 rounded-full text-xs font-bold shadow-md">Build Your Career</span>
                     </div>
@@ -1128,7 +1047,7 @@
     </div>
 
     <!-- SERVICES SECTION -->
-    <section class="max-w-5xl mx-auto px-3 py-10">
+    <section class="max-w-5xl mx-auto px-6 py-24">
         <div class="flex items-center gap-2 mb-2">
             <span class="w-3 h-3 bg-[#58A83E] rounded-full"></span>
             <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">My Services</span>
@@ -1144,9 +1063,7 @@
         </div>
 
         <div class="flex flex-col gap-6">
-            
             <div class="bg-[#1E1A17] text-white rounded-[2rem] p-8 shadow-xl flex flex-col gap-6 border border-[#2D2622]">
-                
                 <!-- Category Tabs -->
                 <div class="flex flex-wrap gap-3 border-b border-gray-700 pb-5" id="service-tabs">
                     <button data-target="landing" class="tab-btn text-sm font-normal border border-gray-600 rounded-full px-4 py-2 transition hover:border-[#58A83E] hover:text-[#58A83E]">Baru mulai kerja remote?</button>
@@ -1159,25 +1076,23 @@
                 <div id="service-content" class="hidden flex-row gap-4 overflow-x-auto w-full pb-2 scrollbar-hide">
                     <!-- Produk muncul pas tombol diklik -->
                 </div>
-
             </div>
-
         </div>
     </section>
 
 </section>
 
-<section id="section-2" class="site-section flex items-center justify-center px-3 py-6 select-none">
+<section id="section-2" class="site-section bg-[#e2e2e5] flex items-center justify-center p-6 select-none">
 
   <!-- Main Canvas Container -->
-  <div class="relative w-full max-w-[1080px] bg-[#f5f5f7] rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-center p-8">
+  <div class="relative w-full max-w-[1080px] bg-[#f5f5f7] rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-center min-h-[600px] p-14">
 
     <!-- 1. Hero Section -->
     <div class="relative z-10 grid grid-cols-12 gap-8 items-center">
 
       <!-- Left Hero: Image Slider 3:4 -->
       <div class="col-span-5 flex items-center justify-center">
-        
+        <!-- Slider Container -->
         <div class="relative w-full max-w-[300px] aspect-[3/4] rounded-2xl shadow-xl overflow-hidden bg-zinc-200 group" id="slider-container">
           
           <div id="slider-track" class="flex w-full h-full transition-transform duration-500 ease-in-out">
@@ -1209,7 +1124,6 @@
             <button class="slider-dot w-2 h-2 rounded-full bg-white/50 transition-all shadow-sm" onclick="section2GoToSlide(1)"></button>
             <button class="slider-dot w-2 h-2 rounded-full bg-white/50 transition-all shadow-sm" onclick="section2GoToSlide(2)"></button>
           </div>
-
         </div>
       </div>
 
@@ -1223,6 +1137,7 @@
         </div>
 
         <h1 id="animated-title" class="text-[56px] font-extrabold tracking-tight lowercase mb-4 title-gradient leading-tight flex flex-wrap">
+          <!-- Teks di-inject dari JavaScript -->
         </h1>
 
         <p class="text-sm text-gray-600 max-w-[420px] leading-relaxed mb-5 font-medium">
@@ -1252,10 +1167,11 @@
 
     </div>
 
-    <!-- 2. Bottom Section: Product Cards Grid -->
+    <!-- 2. Bottom Section: Product Cards -->
     <div class="relative z-20 mt-16">
       <div class="grid grid-cols-3 gap-8">
 
+        <!-- Card 1 -->
         <div class="relative pt-16 mt-2">
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789356872626-3e13dbce-b460-4b86-96e2-86e19618b9ba.gif" alt="Asparagus wild" class="bottom-card-img w-full h-full object-cover hidden" />
@@ -1272,6 +1188,7 @@
           </div>
         </div>
 
+        <!-- Card 2 -->
         <div class="relative pt-16 mt-2">
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789358246753-d116aaad-464f-4664-8137-7246ce5b3e87.gif" alt="Chicken salad" class="bottom-card-img w-full h-full object-cover hidden" />
@@ -1288,6 +1205,7 @@
           </div>
         </div>
 
+        <!-- Card 3 -->
         <div class="relative pt-16 mt-2">
           <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 w-44 aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-[#FAF9F6] bg-zinc-200 flex items-center justify-center transition-transform hover:scale-105">
             <img src="https://www.image2url.com/r2/default/gifs/1789358855720-4b5d91c9-004c-4a7d-9324-e27d267e2c70.gif" alt="Salmon salad" class="bottom-card-img w-full h-full object-cover hidden" />
@@ -1315,15 +1233,19 @@
      SECTION FLIER WORKSHOP 
 =========================================== -->
 <section id="section-flier" class="site-section">
-  <div class="flier-container">
+  <div class="flier-container flex flex-col items-center justify-center">
     <a href="https://wa.me/6281234567890?text=Halo%20Ajeng,%20saya%20tertarik%20dengan%20Workshop" target="_blank" rel="noopener noreferrer">
       <img src="https://www.image2url.com/r2/default/gifs/1789363074155-81f53743-2a66-400b-aa29-1cf94eb8f26f.gif" alt="Workshop Flier" class="flier-image">
+    </a>
+    
+    <!-- Button Join Workshop -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Ajeng,%20saya%20tertarik%20dengan%20Workshop" target="_blank" class="mt-6 bg-[#58A83E] hover:bg-[#4a8f33] text-black font-bold py-2.5 px-6 rounded-full inline-flex items-center gap-2 shadow-md transition text-sm">
+        Join Workshop
     </a>
   </div>
 </section>
 
 <style>
-  /* CSS untuk mengatur gambar Flier */
   .flier-container {
     width: 100%;
     max-width: 800px;
@@ -1331,7 +1253,6 @@
     padding: 0 20px;
     text-align: center;
   }
-
   .flier-image {
     width: 100%;
     height: auto;
@@ -1341,22 +1262,17 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
   }
-
   .flier-container a:hover .flier-image {
     transform: translateY(-5px) scale(1.02);
   }
 </style>
-<!-- ========================================== -->
 
 <section id="section-3" class="site-section">
 
-    <!-- ==========================================
-         BAGIAN ATAS: FOODEZA HERO SECTION
-         ========================================== -->
+    <!-- BAGIAN ATAS: FOODEZA HERO SECTION -->
     <section class="hero-section">
         <div class="container">
             
-            <!-- Gallery Section -->
             <div class="gallery-wrapper has-active" id="galleryWrapper">
                 <div class="gallery-col">
                     <div class="img-box img-1 active" data-id="0">
@@ -1376,25 +1292,20 @@
                 </div>
             </div>
 
-            <!-- Text & Product Info Section -->
             <div class="text-content">
-                <!-- Title dengan Efek Jatuh Per Huruf -->
                 <h1 id="dynamicTitle"></h1>
                 <h2 id="dynamicDescTitle"></h2>
                 
-                <!-- Deskripsi dengan Efek Slide-Up -->
                 <div class="desc-container">
                     <p id="dynamicDesc"></p>
                 </div>
 
-                <!-- Price Box (Harga & Diskon) -->
                 <div class="price-box" id="priceBox">
                     <span class="current-price" id="currentPrice"></span>
                     <span class="original-price" id="originalPrice"></span>
                     <span class="discount-badge" id="discountBadge"></span>
                 </div>
                 
-                <!-- Action Buttons -->
                 <div class="btn-group">
                     <a href="https://wa.me/6281234567890?text=Halo%20Ajeng,%20saya%20ingin%20Order" class="btn btn-primary" id="btnOrder" target="_blank">Order Now</a>
                     <a href="#section-6" class="btn btn-outline" id="btnDetails">Details</a>
@@ -1404,13 +1315,10 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         BAGIAN BAWAH: BAKERY MENU SECTION
-         ========================================== -->
+    <!-- BAGIAN BAWAH: BAKERY MENU SECTION -->
     <section class="menu-section">
         <div class="menu-container">
           
-          <!-- Item 1 -->
           <div class="menu-item">
             <div class="menu-image">
               <img src="https://www.image2url.com/r2/default/gifs/1789379328695-e9dead0d-ac2e-4382-877a-9fb893fc7a77.gif" alt="Muffins">
@@ -1425,7 +1333,6 @@
             </div>
           </div>
       
-          <!-- Item 2 -->
           <div class="menu-item">
             <div class="menu-image">
               <img src="https://www.image2url.com/r2/default/gifs/1789379817088-68f13eaf-090c-4781-83a9-c609394e6116.gif" alt="Pancakes">
@@ -1440,7 +1347,6 @@
             </div>
           </div>
       
-          <!-- Item 3 -->
           <div class="menu-item">
             <div class="menu-image">
               <img src="https://www.image2url.com/r2/default/gifs/1789379544911-5c94419a-ca6b-479d-be3b-caaa83e1adb7.gif" alt="Bagels">
@@ -1455,7 +1361,6 @@
             </div>
           </div>
       
-          <!-- Item 4 -->
           <div class="menu-item">
             <div class="menu-image">
               <img src="https://www.image2url.com/r2/default/gifs/1789379910805-040f0968-7e2e-4171-a2d6-5335bb1cd68d.gif" alt="Bagels">
@@ -1490,26 +1395,23 @@
         <!-- Showcase & Carousel -->
         <div class="showcase-container">
             
-            <!-- Background Coklat/Abu -->
             <div class="pill-bg">
                 <div class="tags-container">
                 </div>
             </div>
 
+            <!-- MANUAL NAVIGATION BUTTONS -->
+            <button id="s4-prev" class="absolute left-[-20px] md:left-5 top-1/2 -translate-y-1/2 bg-[#1E1A17] text-white rounded-full w-10 h-10 flex items-center justify-center z-30 shadow-lg hover:scale-110 transition opacity-80 hover:opacity-100">❮</button>
+            <button id="s4-next" class="absolute right-[-20px] md:right-5 top-1/2 -translate-y-1/2 bg-[#1E1A17] text-white rounded-full w-10 h-10 flex items-center justify-center z-30 shadow-lg hover:scale-110 transition opacity-80 hover:opacity-100">❯</button>
+
             <!-- Carousel Images -->
             <div class="carousel-wrapper">
-                <!-- Slide 1 -->
                 <div class="slide active">
-                    <!-- Pastikan memakai gambar transparan agar nyatu dengan BG -->
                     <img src="https://www.image2url.com/r2/default/images/1789189399648-997c3197-6ab0-4aaa-8bfd-3728c3590f72.png" alt="Diorama 1">
                 </div>
-
-                <!-- Slide 2 -->
                 <div class="slide next">
                     <img src="https://www.image2url.com/r2/default/images/1789189597355-d4ea18e6-a83c-488e-8ccd-352e2ce1b93d.png" alt="Diorama 2">
                 </div>
-
-                <!-- Slide 3 -->
                 <div class="slide prev">
                     <img src="https://www.image2url.com/r2/default/images/1789189856745-a683e91c-b436-4ef9-8300-46eb0c8ebdbb.png" alt="Diorama 3">
                 </div>
@@ -1518,7 +1420,6 @@
         </div>
     </main>
 
-    <!-- Bottom Right Call to Action -->
     <footer class="footer-controls">
         <a href="#section-5" class="explore-link">Explore more</a>
         <a href="https://www.threads.com/messages/t/553511564522743" target="_blank" class="btn-work">Work with Us</a>
@@ -1603,12 +1504,18 @@
 
 </section>
 
+<!-- ==========================================
+     COPYRIGHT FOOTER TERBARU
+=========================================== -->
+<footer class="bg-[#1E1A17] text-gray-400 text-center py-6 text-sm font-medium w-full border-t border-[#2D2622]">
+    © 2026 Ajengwahys. All rights reserved.
+</footer>
+
 <script>
 (function(){
 
-        // 1. Dark / Light Mode Toggle (DIUBAH KE GLOBAL BODY)
         const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body; // Sekarang targetnya adalah global body
+        const body = document.getElementById('section-1');
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
@@ -1619,7 +1526,6 @@
             }
         });
 
-        // 2. Interactive Buttons (Hero)
         const btnPortfolio = document.getElementById('btn-portfolio');
         const btnHireMe = document.getElementById('btn-hire-me');
 
@@ -1633,7 +1539,6 @@
             btnPortfolio.className = "bg-white text-black font-bold py-3 px-6 rounded-full border-2 border-transparent hover:border-gray-200 transition";
         });
 
-        // 3. Typewriter Effect Script
         const words = ["anywhere", "everywhere", "wherever"];
         let wordIndex = 0;
         let charIndex = 0;
@@ -1665,7 +1570,6 @@
             setTimeout(typeWriter, typeSpeed);
         }
 
-        // 4. Interactive Services Data & Logic
         const servicesData = {
             landing: [
                 { name: "Beyond The Wbook", desc: "satu akses untuk belajar, ikut webinar, gabung komunitas, dan terus berkembang di dunia remote work.", price: "Rp 199K" },
@@ -1743,7 +1647,6 @@
 <script>
 (function(){
 
-    // 1. Script Animasi Teks Melayang Per-Huruf
     const titleContainer = document.getElementById('animated-title');
     const text = "REMOTE WORK";
     let titleHTML = '';
@@ -1757,7 +1660,6 @@
     });
     titleContainer.innerHTML = titleHTML;
 
-    // 2. Script Slider (Carousel)
     const track = document.getElementById('slider-track');
     const dots = document.querySelectorAll('.slider-dot');
     let currentIndex = 0;
@@ -1792,7 +1694,6 @@
     sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
     sliderContainer.addEventListener('mouseleave', startSlide);
 
-    // 3. Script Menyembunyikan Placeholder jika URL Gambar diisi
     document.querySelectorAll('.slide-img').forEach(img => {
       if (img.getAttribute('src') && img.getAttribute('src').trim() !== '') {
         img.classList.remove('hidden');
@@ -1814,7 +1715,6 @@
 <script>
 (function(){
 
-        // Database Produk (Teks, Deskripsi, Harga, Diskon)
         const productData = [
             {
                 title: "E-Course Data Entry",
@@ -1863,7 +1763,6 @@
         let currentIndex = 0;
         let autoPlayTimer = null;
 
-        // Fungsi Animasi Title "Jatuh Per Huruf"
         function renderTitleWithFloatEffect(text) {
             elTitle.innerHTML = ""; 
             
@@ -1876,7 +1775,6 @@
             });
         }
 
-        // Fungsi Memperbarui Konten di Halaman
         function updateContent(index) {
             const data = productData[index];
 
@@ -1898,7 +1796,6 @@
             priceBox.style.animation = 's3-slideUpFade 0.5s ease forwards';
         }
 
-        // Fungsi Mengubah Produk Aktif
         function selectProduct(index) {
             currentIndex = index;
 
@@ -1915,7 +1812,6 @@
             updateContent(index);
         }
 
-        // Event listener saat gambar di-klik manual oleh user
         images.forEach((img) => {
             img.addEventListener('click', function() {
                 const id = parseInt(this.getAttribute('data-id'));
@@ -1924,7 +1820,6 @@
             });
         });
 
-        // Fitur Autoplay: Jalan sendiri berganti tiap 4 detik
         function startAutoPlay() {
             autoPlayTimer = setInterval(() => {
                 currentIndex = (currentIndex + 1) % productData.length;
@@ -1932,7 +1827,6 @@
             }, 4000);
         }
 
-        // Inisialisasi awal saat halaman dibuka
         window.addEventListener('load', () => {
             selectProduct(0);
             startAutoPlay();
@@ -1942,12 +1836,22 @@
 </script>
 
 <script>
+        // SCRIPT BARU KHUSUS SECTION 4 (Build Your Personal Brand - Manual Slider & Auto)
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('#section-4 .slide');
             let currentIndex = 0;
             const totalSlides = slides.length;
+            let carouselInterval;
 
-            function updateCarousel() {
+            function updateCarousel(direction = null) {
+                if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                } else if (direction === 'prev') {
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                } else if (direction === null) {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                }
+
                 slides.forEach(slide => {
                     slide.classList.remove('active', 'prev', 'next');
                 });
@@ -1958,103 +1862,28 @@
                 slides[currentIndex].classList.add('active'); 
                 slides[nextIndex].classList.add('next');      
                 slides[prevIndex].classList.add('prev');      
-                
-                currentIndex = (currentIndex + 1) % totalSlides;
             }
 
-            setInterval(updateCarousel, 3500);
-        });
-    
-        document.addEventListener('DOMContentLoaded', () => {
-            const s4Parts = [
-                { id: 's4-part1', text: 'build your' },
-                { id: 's4-part2', text: 'personal' },
-                { id: 's4-part3', text: 'brand' }
-            ];
-            let s4LetterIndex = 0;
-            s4Parts.forEach(part => {
-                const el = document.getElementById(part.id);
-                if (!el) return;
-                el.innerHTML = '';
-                part.text.split('').forEach(char => {
-                    const span = document.createElement('span');
-                    if (char === ' ') {
-                        span.style.width = '0.3em';
-                        span.style.display = 'inline-block';
-                    } else {
-                        span.className = 's4-letter';
-                        span.style.animationDelay = `${s4LetterIndex * 0.1}s`;
-                        span.textContent = char;
-                    }
-                    el.appendChild(span);
-                    s4LetterIndex++;
+            // Integrasi Tombol Manual Slide
+            const btnPrev = document.getElementById('s4-prev');
+            const btnNext = document.getElementById('s4-next');
+
+            if (btnPrev && btnNext) {
+                btnPrev.addEventListener('click', () => {
+                    clearInterval(carouselInterval);
+                    updateCarousel('prev');
+                    carouselInterval = setInterval(() => updateCarousel(), 3500); // Resume auto
                 });
-            });
+                
+                btnNext.addEventListener('click', () => {
+                    clearInterval(carouselInterval);
+                    updateCarousel('next');
+                    carouselInterval = setInterval(() => updateCarousel(), 3500); // Resume auto
+                });
+            }
+
+            carouselInterval = setInterval(() => updateCarousel(), 3500);
         });
-</script>
-
-<script>
-(function(){
-
-    const cards = document.querySelectorAll('#section-5 .card');
-    const numEl = document.getElementById('ind-num');
-    const textEl = document.getElementById('ind-text');
-
-    const labels = ["Data Annotation", "Data Entry", "AI Trainer", "Remote Work"];
-    let currentIndex = 0;
-    let autoPlayInterval = null;
-
-    function updateCarousel() {
-      const total = cards.length;
-
-      cards.forEach((card, i) => {
-        card.className = 'card';
-        const video = card.querySelector('video');
-
-        let diff = (i - currentIndex + total) % total;
-
-        if (diff === 0) {
-          card.classList.add('active');
-          if (video) {
-            video.currentTime = 0;
-            video.play().catch(e => console.log("Autoplay dicegah:", e));
-          }
-        } else if (diff === total - 1) {
-          card.classList.add('prev');
-          if (video) video.pause();
-        } else if (diff === 1) {
-          card.classList.add('next');
-          if (video) video.pause();
-        } else {
-          card.classList.add('hidden');
-          if (video) video.pause();
-        }
-      });
-
-      numEl.textContent = "0" + (currentIndex + 1);
-      textEl.textContent = labels[currentIndex];
-    }
-
-    cards.forEach((card, index) => {
-      card.addEventListener('click', () => {
-        clearInterval(autoPlayInterval);
-        currentIndex = index;
-        updateCarousel();
-        startAutoPlay();
-      });
-    });
-
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
-      }, 3500); 
-    }
-
-    updateCarousel();
-    startAutoPlay();
-
-})();
 </script>
 
 </body>
